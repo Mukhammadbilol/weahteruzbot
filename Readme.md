@@ -1,5 +1,7 @@
 dotnet new gitignore
+<br>
 git init
+<br>
 git add .
 git commit -m "nimadir message"
 git remote add <remote_name> <url>
