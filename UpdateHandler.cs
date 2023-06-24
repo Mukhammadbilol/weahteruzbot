@@ -21,7 +21,7 @@ public partial class UpdateHandler : IUpdateHandler
 
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
-        var handlerTask = update.Type switch
+        var handleTask = update.Type switch
         {
             UpdateType.Message => HandleMessageUpdateAsync(botClient, update.Message, cancellationToken),
             UpdateType.EditedMessage => HandleEditedMessageUpdateAsync(botClient, update.EditedMessage, cancellationToken),
@@ -30,7 +30,7 @@ public partial class UpdateHandler : IUpdateHandler
 
         try
         {
-            await handlerTask;
+            await handleTask;
         }
         catch (Exception ex)
         {
@@ -40,8 +40,8 @@ public partial class UpdateHandler : IUpdateHandler
 
     private Task HandleUnknownUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Received {updateType} update", update.Type);
-        
+        logger.LogInformation("Received {updateType} update.", update.Type);
+
         return Task.CompletedTask;
     }
 }

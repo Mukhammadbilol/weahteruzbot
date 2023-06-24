@@ -1,14 +1,14 @@
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 
-public class BotBackgroundService : BackgroundService
+public class BotBackgroundTask : BackgroundService
 {
-    private readonly ILogger<BotBackgroundService> logger;
+    private readonly ILogger<BotBackgroundTask> logger;
     private readonly ITelegramBotClient botClient;
     private readonly IUpdateHandler updateHandler;
 
-    public BotBackgroundService(
-        ILogger<BotBackgroundService> logger,
+    public BotBackgroundTask(
+        ILogger<BotBackgroundTask> logger,
         ITelegramBotClient botClient,
         IUpdateHandler updateHandler)
     {
@@ -26,5 +26,7 @@ public class BotBackgroundService : BackgroundService
             updateHandler: updateHandler,
             receiverOptions: default,
             cancellationToken: stoppingToken);
+        
+        // await botClient.ReceiveAsync(updateHandler.HandleUpdateAsync, updateHandler.HandlePollingErrorAsync, default);
     }
 }
